@@ -1,3 +1,10 @@
+*.gcda
+*.gcno
+/src/tests/*
+!/src/tests/s21_*.[ch]
+!/src/tests/test_format.c
+/src/report/
+
 # Prerequisites
 *.d
 
