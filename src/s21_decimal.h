@@ -26,8 +26,12 @@ zero. Bit 31 contains the sign; 0 meaning positive, and 1 meaning negative. Note
 that the bit representation differentiates between negative and positive zero.
 These values can be treated as being equal in all operations. */
 typedef struct {
-  int bits[4];
+  unsigned int bits[4];
 } s21_decimal;
+
+typedef struct {
+  unsigned int bits[7];
+} s21_long_decimal;
 
 typedef enum {
   OK = 0,
@@ -124,10 +128,13 @@ int s21_truncate(s21_decimal value, s21_decimal *result);
 // Returns the result of multiplying the specified Decimal value by negative one.	
 int s21_negate(s21_decimal value, s21_decimal *result);
 
+#define CALCULATION_ERROR 1
 /* 
 Return value — code error:
 
 0 — OK;
 1 — calculation error.
 */
-#endif _S21_DEСIMAL_H_
+
+void s21_print_binary(s21_decimal value);
+#endif  // _S21_DEСIMAL_H_
