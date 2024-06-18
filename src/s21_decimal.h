@@ -25,6 +25,10 @@ power of 10 to divide the integer number. Bits 24 to 30 are unused and must be
 zero. Bit 31 contains the sign; 0 meaning positive, and 1 meaning negative. Note
 that the bit representation differentiates between negative and positive zero.
 These values can be treated as being equal in all operations. */
+
+#define POSITIVE 0
+#define NEGATIVE 1
+
 typedef struct {
   unsigned int bits[4];
 } s21_decimal;
@@ -136,5 +140,13 @@ Return value — code error:
 1 — calculation error.
 */
 
-void s21_print_binary(s21_decimal value);
+/* Utility helper functions */
+
+void s21_print_decimal_as_binary(s21_decimal *value);
+
+int get_nth_bit_value(s21_decimal *value, int n, int *result);
+int set_nth_bit_value(s21_decimal *value, int n, int value_to_set);
+
+int get_sign_of_decimal(s21_decimal *value, int *result);
+int set_sign_of_decimal(s21_decimal *value, int sign_to_set);
 #endif  // _S21_DEСIMAL_H_
