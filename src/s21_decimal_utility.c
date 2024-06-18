@@ -56,6 +56,65 @@ int set_sign_of_decimal(s21_decimal *value, int sign_to_set) {
     status = CALCULATION_ERROR;
   }
   if (status == OK) {
-      value->bits[3] |= (sign_to_set << 31);
+    value->bits[3] |= (sign_to_set << 31);
   }
-  return status;}
+  return status;
+}
+
+int get_exponent_of_decimal(s21_decimal *value, int *result) {
+  int status = OK;
+  if (value == NULL || result == NULL) {
+    status = CALCULATION_ERROR;
+  }
+  if (status == OK) {
+    *result = (value->bits[3] >> 16) & 31;
+  }
+  return status;
+}
+int set_exponent_of_decimal(s21_decimal *value, int exponent_to_set) {
+  int status = OK;
+  if (value == NULL || exponent_to_set < 0 || exponent_to_set > 28) {
+    status = CALCULATION_ERROR;
+  }
+  if (status == OK) {
+    value->bits[3] |= (exponent_to_set << 16);
+  }
+  return status;
+}
+
+int s21_mantissa_add(s21_decimal value_1, s21_decimal value_2,
+                     s21_decimal *result) {
+  int status = OK;
+  if (result == NULL) status = CALCULATION_ERROR;
+  if (status == OK) {
+    int carry = 0;
+    for (int i = 0; i < 96; i++) {
+      int bit1 = (value_1.bits[i / 32] >> (i % 32)) & 1;
+      int bit2 = (value_2.bits[i / 32] >> (i % 32)) & 1;
+      int sum = bit1 + bit2 + carry;
+      result->bits[i / 32] |= (sum % 2) << (i % 32);
+      carry = sum / 2;
+    }
+    if (carry) {
+      status = CALCULATION_ERROR;
+    }
+  }
+  return status;
+}
+
+int s21_mantissa_sub(s21_decimal value_1, s21_decimal value_2,
+                     s21_decimal *result) {
+  int status = OK;
+  if (result == NULL) status = CALCULATION_ERROR;
+  if (status == OK) {
+    int carry = 0;
+    for (int i = 0; i < 96; i++) {
+      int bit1 = (value_1.bits[i / 32] >> (i % 32)) & 1;
+      int bit2 = (value_2.bits[i / 32] >> (i % 32)) & 1;
+      int sum = bit1 - bit2 - carry;
+      result->bits[i / 32] |= (sum % 2) << (i % 32);
+      carry = sum / 2;
+    }
+  }
+  return status;
+}

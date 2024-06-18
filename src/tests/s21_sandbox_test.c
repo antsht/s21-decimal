@@ -20,7 +20,22 @@ START_TEST(s21_sandbox_1) {
   set_nth_bit_value(&result, 64, 1);
   set_nth_bit_value(&result, 95, 1);
   s21_print_decimal_as_binary(&result);
+  set_exponent_of_decimal(&result, 12);
+  s21_print_decimal_as_binary(&result);
+  set_exponent_of_decimal(&result, 28);
+  int exp = 0;
+  get_exponent_of_decimal(&result,  &exp);
+  printf("Exp: %d\n", exp);
+  s21_print_decimal_as_binary(&result);
   printf("Status: %d\n", status);
+  s21_decimal result2 = {0};
+  set_nth_bit_value(&result2, 2, 1);
+  set_nth_bit_value(&result2, 30, 1);
+  set_nth_bit_value(&result2, 31, 1);
+  s21_print_decimal_as_binary(&result2);
+  s21_decimal sum = {0};
+  status = s21_mantissa_add(result, result2, &sum);
+  s21_print_decimal_as_binary(&sum);
 
   ck_assert(1 == 1);
 }

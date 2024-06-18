@@ -149,4 +149,12 @@ int set_nth_bit_value(s21_decimal *value, int n, int value_to_set);
 
 int get_sign_of_decimal(s21_decimal *value, int *result);
 int set_sign_of_decimal(s21_decimal *value, int sign_to_set);
+
+int get_exponent_of_decimal(s21_decimal  *value, int  *result);
+int set_exponent_of_decimal(s21_decimal  *value, int exponent_to_set);
+
+int s21_mantissa_add(s21_decimal value_1, s21_decimal value_2,
+                     s21_decimal *result);
+int s21_mantissa_sub(s21_decimal value_1, s21_decimal value_2,
+                     s21_decimal *result);
 #endif  // _S21_DEСIMAL_H_
