@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <limits.h>
 
 /* The binary representation of a Decimal number consists of a 1-bit sign, a
 96-bit integer number, and a scaling factor used to divide the integer number
