@@ -8,8 +8,8 @@ START_TEST(s21_negate_test_1) {
   s21_decimal result = {0};
   int status = 0;
   status = s21_negate(dec, &result);
-  s21_print_binary(dec);
-  s21_print_binary(result);
+  s21_print_decimal_as_binary(&dec);
+  s21_print_decimal_as_binary(&result);
   printf("Status: %d\n", status);
 
   ck_assert(status == OK && result.bits[0] == 1U && result.bits[1] == 0 &&

@@ -13,13 +13,3 @@ int s21_negate(s21_decimal value, s21_decimal *result) {
   }
   return status;
 }
-
-void s21_print_binary(s21_decimal value) {
-  for (int i = 3; i >= 0; i--) {
-    for (int j = 31; j >= 0; j--) {
-      printf("%d", (value.bits[i] >> j) & 1);
-    }
-    printf(" ");
-  }
-  printf("\n");
-}

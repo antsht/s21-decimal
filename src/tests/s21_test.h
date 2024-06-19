@@ -4,6 +4,6 @@
 #include "../s21_decimal.h"
 
 int s21_negate_test(void);
-// int s21_misc_test(void);
+int s21_sandbox_test(void);
 
 #endif
