@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <limits.h>
 
 /* The binary representation of a Decimal number consists of a 1-bit sign, a
 96-bit integer number, and a scaling factor used to divide the integer number
@@ -101,6 +102,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst);
 
 // To int	
 int s21_from_decimal_to_int(s21_decimal src, int *dst);
+/* check if exp > 0 divide by 10^exp then convert */
 
 //To float	
 int s21_from_decimal_to_float(s21_decimal src, float *dst);
