@@ -3,68 +3,54 @@
 #include "s21_test.h"
 
 START_TEST(s21_from_int_to_decimal_test_1) {
-int src_int = 0;
+  int src_int = 0;
   s21_decimal result = {0};
   int status = 0;
   status = s21_from_int_to_decimal(src_int, &result);
-  s21_print_decimal_as_binary(&result);
-  printf("Status: %d\n", status);
-
   ck_assert(status == OK && result.bits[0] == 0U && result.bits[1] == 0 &&
             result.bits[2] == 0 && result.bits[3] == (0U << 31));
 }
 END_TEST
 
 START_TEST(s21_from_int_to_decimal_test_2) {
-int src_int = 666;
+  int src_int = 666;
   s21_decimal result = {0};
   int status = 0;
   status = s21_from_int_to_decimal(src_int, &result);
-  s21_print_decimal_as_binary(&result);
-  printf("Status: %d\n", status);
-
   ck_assert(status == OK && result.bits[0] == 666U && result.bits[1] == 0 &&
             result.bits[2] == 0 && result.bits[3] == (0U << 31));
 }
 END_TEST
 
-
 START_TEST(s21_from_int_to_decimal_test_3) {
-int src_int = -666;
+  int src_int = -666;
   s21_decimal result = {0};
   int status = 0;
   status = s21_from_int_to_decimal(src_int, &result);
-  s21_print_decimal_as_binary(&result);
-  printf("Status: %d\n", status);
-
   ck_assert(status == OK && result.bits[0] == 666U && result.bits[1] == 0 &&
             result.bits[2] == 0 && result.bits[3] == (1U << 31));
 }
 END_TEST
 
 START_TEST(s21_from_int_to_decimal_test_4) {
-int src_int = INT_MAX;
+  int src_int = INT_MAX;
   s21_decimal result = {0};
   int status = 0;
   status = s21_from_int_to_decimal(src_int, &result);
-  s21_print_decimal_as_binary(&result);
-  printf("Status: %d\n", status);
-
-  ck_assert(status == OK && result.bits[0] == (unsigned int)INT_MAX && result.bits[1] == 0 &&
-            result.bits[2] == 0 && result.bits[3] == (0U << 31));
+  ck_assert(status == OK && result.bits[0] == (unsigned int)INT_MAX &&
+            result.bits[1] == 0 && result.bits[2] == 0 &&
+            result.bits[3] == (0U << 31));
 }
 END_TEST
 
 START_TEST(s21_from_int_to_decimal_test_5) {
-int src_int = INT_MIN;
+  int src_int = INT_MIN;
   s21_decimal result = {0};
   int status = 0;
   status = s21_from_int_to_decimal(src_int, &result);
-  s21_print_decimal_as_binary(&result);
-  printf("Status: %d\n", status);
-
-  ck_assert(status == OK && result.bits[0] == ((unsigned int)INT_MAX)+1 && result.bits[1] == 0 &&
-            result.bits[2] == 0 && result.bits[3] == (1U << 31));
+  ck_assert(status == OK && result.bits[0] == 2147483648U &&
+            result.bits[1] == 0 && result.bits[2] == 0 &&
+            result.bits[3] == (1U << 31));
 }
 END_TEST
 
